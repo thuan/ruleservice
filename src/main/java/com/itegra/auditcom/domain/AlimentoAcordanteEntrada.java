@@ -30,6 +30,15 @@ public class AlimentoAcordanteEntrada implements java.io.Serializable {
 
     private String cnpjDestinatario;
 
+    @org.kie.api.definition.type.Label("Categoria")
+    private String categoria;
+
+    @org.kie.api.definition.type.Label("Cst")
+    private String cst;
+
+    @org.kie.api.definition.type.Label("Norma Execução")
+    private String normaExecucao;
+
     public AlimentoAcordanteEntrada(int crt, double percentualICMS) {
         this.crt = crt;
         this.percentualICMS = percentualICMS;
@@ -134,5 +143,29 @@ public class AlimentoAcordanteEntrada implements java.io.Serializable {
 
     public void setCnpjDestinatario(String cnpjDestinatario) {
         this.cnpjDestinatario = cnpjDestinatario;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getCst() {
+        return cst;
+    }
+
+    public void setCst(String cst) {
+        this.cst = cst;
+    }
+
+    public String getNormaExecucao() {
+        return normaExecucao;
+    }
+
+    public void setNormaExecucao(String normaExecucao) {
+        this.normaExecucao = normaExecucao;
     }
 }
