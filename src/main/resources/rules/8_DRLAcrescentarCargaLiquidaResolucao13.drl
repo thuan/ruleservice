@@ -1,0 +1,37 @@
+package rules;
+import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
+import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
+dialect  "mvel"
+
+rule "GuidedAcrescentarCargaLiquidaResolucao13 1"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
+	then
+		resultado.setCalcularImposto( true );
+		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.0176 );
+end
+
+rule "GuidedAcrescentarCargaLiquidaResolucao13 2"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
+	then
+		resultado.setCalcularImposto( true );
+		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.047 );
+end
+
+rule "GuidedAcrescentarCargaLiquidaResolucao13 3"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false )
+		obj : AlimentoAcordanteEntrada( (cst == null || cst == "") || ( cst.substring(0,0) != "1" || cst.substring(0,0) != "2" || cst.substring(0,0) != "3" || cst.substring(0,0) != "8" ))
+	then
+		resultado.setCalcularImposto( true );
+end
+
+rule "GuidedAcrescentarCargaLiquidaResolucao13 4"
+	when
+		obj : AlimentoAcordanteEntrada( cst == null || cst == "" )
+	then
+		resultado.setMensagem( "CST nao informado" );
+end

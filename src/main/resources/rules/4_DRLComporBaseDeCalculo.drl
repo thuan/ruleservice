@@ -1,0 +1,21 @@
+package rules;
+import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
+import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
+dialect  "mvel"
+
+rule "Regra Compor Base De Calculo 1"
+	when
+		obj : AlimentoAcordanteEntrada( )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+	then
+		resultado.setValorBaseDeCalculo( obj.getValorItem() + obj.getValorIPI() + obj.getValorFrete() + obj.getValorSeguro() + obj.getValorOutros() );
+end
+
+rule "Regra Compor Base De Calculo 2"
+	when
+		obj : AlimentoAcordanteEntrada( ( cfop == 6151 || cfop == 6152 || cfop == 6155 || cfop == 6156 || cfop == 6408 || cfop == 6409 ) && cnpjEmitente.substring(0,6) == ( cnpjDestinatario.substring(0,6) ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( regiaoEmitente not in ( "INTERNO", "EXTERIOR" ) )
+	then
+		resultado.setValorBaseDeCalculo( (obj.getValorItem() + obj.getValorIPI() + obj.getValorFrete() + obj.getValorSeguro() + obj.getValorOutros() ) * 1.3 );
+end
+

@@ -1,0 +1,22 @@
+package rules;
+import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
+import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
+dialect  "mvel"
+
+rule "optante"
+    when
+        obj: AlimentoAcordanteEntrada( ( percentualICMS == null || percentualICMS == 0.0 ) && ( crt == 1 || crt == 2 ))
+        resultado : ResultadoAlimentoAcordanteEntrada( )
+    then
+        resultado.setSimplesNacional(true);
+        resultado.setMensagem("optante pelo simples");
+end
+
+rule "nao optante"
+    when
+    	obj : AlimentoAcordanteEntrada( ( percentualICMS != null && percentualICMS != 0.0 )|| ( crt != 1 && crt != 2 && crt != null ))
+    	resultado : ResultadoAlimentoAcordanteEntrada( )
+    then
+    	resultado.setSimplesNacional( false );
+    	resultado.setMensagem("nao optante pelo simples nacional");
+end

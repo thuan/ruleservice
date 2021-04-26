@@ -1,0 +1,11 @@
+package rules;
+import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
+import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
+dialect  "mvel"
+
+rule "regra calcular imposto"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( calcularImposto == true )
+	then
+		resultado.setValorImposto( resultado.getValorBaseDeCalculo() * resultado.getPercentualCargaLiquida() );
+end

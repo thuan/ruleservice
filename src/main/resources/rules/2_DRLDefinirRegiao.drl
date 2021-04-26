@@ -1,0 +1,68 @@
+package rules;
+import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
+import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
+dialect "mvel"
+
+rule "Definir Regiao 1"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada(  ufEmitente == "CE" )
+	then
+		resultado.setRegiaoEmitente( "INTERNO" );
+end
+
+rule "Definir Regiao 2"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+	then
+		resultado.setRegiaoEmitente( "SUL_SUDESTE" );
+end
+
+rule "Definir Regiao 3"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+	then
+		resultado.setRegiaoEmitente( "OUTROS" );
+end
+
+rule "Definir Regiao 4"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufEmitente == null || ufEmitente not in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO", "SP", "MG", "RJ", "PR", "SC", "RS", "CE", "EX" )  )
+	then
+		resultado.setMensagem( "UF emitente inválida." );
+end
+
+rule "Definir Regiao 5"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada(  ufDestinatario == "CE" )
+	then
+		resultado.setRegiaoDestinatario( "INTERNO" );
+end
+
+rule "Definir Regiao 6"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufDestinatario in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+	then
+		resultado.setRegiaoDestinatario( "SUL_SUDESTE" );
+end
+
+rule "Definir Regiao 7"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufDestinatario in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+	then
+		resultado.setRegiaoDestinatario( "OUTROS" );
+end
+
+rule "Definir Regiao 8"
+	when
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada( ufDestinatario == null || ufDestinatario not in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO", "SP", "MG", "RJ", "PR", "SC", "RS", "CE", "EX" )  )
+	then
+		resultado.setMensagem( "UF destinatário inválida." );
+end
