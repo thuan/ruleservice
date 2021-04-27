@@ -30,13 +30,10 @@ public class AlimentoAcordanteEntrada implements java.io.Serializable {
 
     private String cnpjDestinatario;
 
-    @org.kie.api.definition.type.Label("Categoria")
     private String categoria;
 
-    @org.kie.api.definition.type.Label("Cst")
     private String cst;
 
-    @org.kie.api.definition.type.Label("Norma Execução")
     private String normaExecucao;
 
     public AlimentoAcordanteEntrada(int crt, double percentualICMS) {
@@ -47,6 +44,27 @@ public class AlimentoAcordanteEntrada implements java.io.Serializable {
     public AlimentoAcordanteEntrada(String ufEmitente, String ufDestinatario) {
         this.ufEmitente = ufEmitente;
         this.ufDestinatario = ufDestinatario;
+    }
+
+    public AlimentoAcordanteEntrada(int crt, double percentualICMS, String ufEmitente, String ufDestinatario, double valorItem, double valorIPI, double valorFrete, double valorSeguro, double valorOutros, int cfop, String cnpjEmitente, String cnpjDestinatario, String categoria, String cst, String normaExecucao) {
+        this.crt = crt;
+        this.percentualICMS = percentualICMS;
+        this.ufEmitente = ufEmitente;
+        this.ufDestinatario = ufDestinatario;
+        this.valorItem = valorItem;
+        this.valorIPI = valorIPI;
+        this.valorFrete = valorFrete;
+        this.valorSeguro = valorSeguro;
+        this.valorOutros = valorOutros;
+        this.cfop = cfop;
+        this.cnpjEmitente = cnpjEmitente;
+        this.cnpjDestinatario = cnpjDestinatario;
+        this.categoria = categoria;
+        this.cst = cst;
+        this.normaExecucao = normaExecucao;
+    }
+
+    public AlimentoAcordanteEntrada() {
     }
 
     public int getCrt() {
