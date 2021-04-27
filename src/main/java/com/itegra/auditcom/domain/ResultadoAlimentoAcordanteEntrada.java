@@ -10,7 +10,7 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
 
     private double valorImposto;
     private double valorBaseDeCalculo;
-    private double percentualCargaLiquida;
+    private Double percentualCargaLiquida;
 
     private boolean calcularImposto;
     private boolean simplesNacional;
@@ -20,18 +20,23 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
     private String regiaoDestinatario;
     private String fluxo;
     private String tipoProduto;
+    private String categoria;
 
-    public ResultadoAlimentoAcordanteEntrada() {}
+    public ResultadoAlimentoAcordanteEntrada() {
+    }
 
-    public ResultadoAlimentoAcordanteEntrada(String mensagem, String regiaoEmitente, String regiaoDestinatario) {
+    public ResultadoAlimentoAcordanteEntrada(double valorImposto, double valorBaseDeCalculo, Double percentualCargaLiquida, boolean calcularImposto, boolean simplesNacional, String mensagem, String regiaoEmitente, String regiaoDestinatario, String fluxo, String tipoProduto, String categoria) {
+        this.valorImposto = valorImposto;
+        this.valorBaseDeCalculo = valorBaseDeCalculo;
+        this.percentualCargaLiquida = percentualCargaLiquida;
+        this.calcularImposto = calcularImposto;
+        this.simplesNacional = simplesNacional;
         this.mensagem = mensagem;
         this.regiaoEmitente = regiaoEmitente;
         this.regiaoDestinatario = regiaoDestinatario;
-    }
-
-    public ResultadoAlimentoAcordanteEntrada(boolean simplesNacional, String mensagem) {
-        this.simplesNacional = simplesNacional;
-        this.mensagem = mensagem;
+        this.fluxo = fluxo;
+        this.tipoProduto = tipoProduto;
+        this.categoria = categoria;
     }
 
     public boolean isCalcularImposto() {
@@ -58,11 +63,11 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
         this.valorBaseDeCalculo = valorBaseDeCalculo;
     }
 
-    public double getPercentualCargaLiquida() {
-        return this.percentualCargaLiquida;
+    public Double getPercentualCargaLiquida() {
+        return percentualCargaLiquida;
     }
 
-    public void setPercentualCargaLiquida(double percentualCargaLiquida) {
+    public void setPercentualCargaLiquida(Double percentualCargaLiquida) {
         this.percentualCargaLiquida = percentualCargaLiquida;
     }
 
@@ -112,5 +117,13 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
 
     public void setTipoProduto(String tipoProduto) {
         this.tipoProduto = tipoProduto;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }
