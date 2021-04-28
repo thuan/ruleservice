@@ -8,5 +8,5 @@ rule "GuidedAcrescentarCargaLiquidaNormadeExecucao"
 		obj : AlimentoAcordanteEntrada( normaExecucao == "1" )
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
-		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.05 );
+		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.05 );
 end

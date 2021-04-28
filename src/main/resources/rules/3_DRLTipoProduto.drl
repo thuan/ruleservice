@@ -37,7 +37,7 @@ end
 
 rule "GuidedTipoProduto 5"
 	when
-		obj : AlimentoAcordanteEntrada( categoria == "null" || "")
+		obj : AlimentoAcordanteEntrada( categoria == "null" || categoria == "")
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "Categoria não informada" );
@@ -45,7 +45,7 @@ end
 
 rule "GuidedTipoProduto 6"
 	when
-		obj : AlimentoAcordanteEntrada( (categoria != "2004" || "2005" || "2001" || "2002") || (categoria.substring(0,1) != "24"))
+		obj : AlimentoAcordanteEntrada( (categoria != "2004" || categoria != "2005" || categoria != "2001" || categoria != "2002") || (categoria.substring(0,1) != "24"))
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "Categoria desconhecida" );

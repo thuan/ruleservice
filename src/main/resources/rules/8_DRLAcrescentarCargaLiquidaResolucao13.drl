@@ -9,7 +9,7 @@ rule "GuidedAcrescentarCargaLiquidaResolucao13 1"
 		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
 	then
 		resultado.setCalcularImposto( true );
-		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.0176 );
+		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.0176 );
 end
 
 rule "GuidedAcrescentarCargaLiquidaResolucao13 2"
@@ -18,7 +18,7 @@ rule "GuidedAcrescentarCargaLiquidaResolucao13 2"
 		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
 	then
 		resultado.setCalcularImposto( true );
-		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.047 );
+		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.047 );
 end
 
 rule "GuidedAcrescentarCargaLiquidaResolucao13 3"
@@ -32,6 +32,7 @@ end
 rule "GuidedAcrescentarCargaLiquidaResolucao13 4"
 	when
 		obj : AlimentoAcordanteEntrada( cst == null || cst == "" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setMensagem( "CST nao informado" );
 end
