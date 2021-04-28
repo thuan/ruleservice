@@ -22,7 +22,7 @@ public class TipoProdutoResource {
 
     private final Logger log = LoggerFactory.getLogger(TipoProdutoResource.class);
 
-    private TipoProdutoService tipoProdutoService;
+    private final TipoProdutoService tipoProdutoService;
 
     @Autowired
     public TipoProdutoResource(TipoProdutoService tipoProdutoService) {
