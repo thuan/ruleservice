@@ -17,15 +17,12 @@ public class KieService {
         this.kieContainer = kieContainer;
     }
 
-    public ResultadoAlimentoAcordanteEntrada resultado(
-        AlimentoAcordanteEntrada alimentoAcordanteEntrada,
-        ResultadoAlimentoAcordanteEntrada resultadoAlimentoAcordanteEntrada
-    ) {
+    public ResultadoAlimentoAcordanteEntrada resultado(AlimentoAcordanteEntrada entrada, ResultadoAlimentoAcordanteEntrada resultado) {
         KieSession kieSession = kieContainer.newKieSession();
-        kieSession.insert(alimentoAcordanteEntrada);
-        kieSession.insert(resultadoAlimentoAcordanteEntrada);
+        kieSession.insert(entrada);
+        kieSession.insert(resultado);
         kieSession.fireAllRules();
         kieSession.dispose();
-        return resultadoAlimentoAcordanteEntrada;
+        return resultado;
     }
 }

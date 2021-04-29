@@ -9,7 +9,6 @@ rule "optante"
         resultado : ResultadoAlimentoAcordanteEntrada( )
     then
         resultado.setSimplesNacional(true);
-        resultado.setMensagem("optante pelo simples");
 end
 
 rule "nao optante"
@@ -18,5 +17,4 @@ rule "nao optante"
     	resultado : ResultadoAlimentoAcordanteEntrada( )
     then
     	resultado.setSimplesNacional( false );
-    	resultado.setMensagem("nao optante pelo simples nacional");
 end

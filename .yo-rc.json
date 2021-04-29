@@ -36,6 +36,8 @@
     "jwtSecretKey": "YjkyOThlZGVkNDExMzJmZjMwMTFlOTc3YTMyYWMzMGEyNDAxNmRkODg3NjgzYzA2YzVmMzM1ZThiOGVkMzA2NTU5ZmVlYjM4MzFlNjYxNjAzMTNjMmM5MTA4ODdiYjUzZWE4MjljZThmODM1Mzg4ZGNhNTllNTU1YTljMDVhZjU=",
     "devDatabaseType": "no",
     "prodDatabaseType": "no",
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["Condominio", "Unidade", "Morador"],
+    "lastLiquibaseTimestamp": 1619655541000
   }
 }

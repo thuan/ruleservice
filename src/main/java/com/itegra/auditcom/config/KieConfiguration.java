@@ -25,22 +25,27 @@ public class KieConfiguration {
         KieServices kieServices = KieServices.Factory.get();
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
         ClassPathResource classPathResource = new ClassPathResource(drlFile);
-        if(classPathResource.isDirectory()) {
-            classPathResource.listResources()
-                .forEach(file -> {
-                    FileSystemResource fResource = ((FileSystemResource)file);
-                    log.debug("Writting file: " + fResource.getFile().getName());
-                    kieFileSystem.write(fResource);
-                });
-        } else {
-            kieFileSystem.write(ResourceFactory.newClassPathResource(drlFile));
-        }
-
+        writeDrl(kieFileSystem, classPathResource);
         //kieFileSystem.write(ResourceFactory.newClassPathResource(drlFile));
-
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
         kieBuilder.buildAll();
         KieModule kieModule = kieBuilder.getKieModule();
         return kieServices.newKieContainer(kieModule.getReleaseId());
+    }
+
+    private void writeDrl(KieFileSystem kieFileSystem, ClassPathResource classPathResource) {
+        if (classPathResource.isDirectory()) {
+            classPathResource
+                .listResources()
+                .forEach(
+                    file -> {
+                        FileSystemResource fResource = ((FileSystemResource) file);
+                        log.debug("Writting file: " + fResource.getFile().getName());
+                        kieFileSystem.write(fResource);
+                    }
+                );
+        } else {
+            kieFileSystem.write(ResourceFactory.newClassPathResource(drlFile));
+        }
     }
 }
