@@ -1,88 +1,100 @@
 package rules;
 import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
 import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
-dialect  "mvel"
+dialect "mvel"
 
 rule "Definir Carga Liquida Base 1"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "7%_CESTA_BASICA" && regiaoEmitente == "INTERNO" )
+		obj : AlimentoAcordanteEntrada( categoria == "2004" && ufEmitente == "CE" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.02 );
 end
 
 rule "Definir Carga Liquida Base 2"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "7%_CESTA_BASICA" && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( categoria == "2004" && ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.045 );
 end
 
 rule "Definir Carga Liquida Base 3"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "7%_CESTA_BASICA" && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( categoria == "2004" && ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.035 );
 end
 
 rule "Definir Carga Liquida Base 4"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "12%_CESTA_BASICA" && regiaoEmitente == "INTERNO" )
+		obj : AlimentoAcordanteEntrada( categoria == "2005" && ufEmitente == "CE" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.026 );
 end
 
 rule "Definir Carga Liquida Base 5"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "12%_CESTA_BASICA" && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( categoria == "2005" && ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.056 );
 end
 
 rule "Definir Carga Liquida Base 6"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "12%_CESTA_BASICA" && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( categoria == "2005" && ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.044 );
 end
 
 rule "Definir Carga Liquida Base 7"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "17%" && regiaoEmitente == "INTERNO" )
+		obj : AlimentoAcordanteEntrada( categoria == "2001" && ufEmitente == "CE" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.03 );
 end
 
 rule "Definir Carga Liquida Base 8"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "17%" && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( categoria == "2001" && ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.076 );
 end
 
 rule "Definir Carga Liquida Base 9"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "17%" && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( categoria == "2001" && ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.06 );
 end
 
 rule "Definir Carga Liquida Base 10"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "25%_VINHOS_SIDRAS_BEBIDASQUENTES" && regiaoEmitente == "INTERNO" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada(  ufEmitente == "CE" && (categoria == "2002" || categoria.substring(0,2) == "24"))
 	then
 		resultado.setPercentualCargaLiquida( 0.056 );
 end
 
 rule "Definir Carga Liquida Base 11"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "25%_VINHOS_SIDRAS_BEBIDASQUENTES" && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( (categoria == "2002" || categoria.substring(0,2) == "24") && ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.1620 );
 end
 
 rule "Definir Carga Liquida Base 12"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( tipoProduto == "25%_VINHOS_SIDRAS_BEBIDASQUENTES" && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( (categoria == "2002" || categoria.substring(0,2) == "24") && ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( 0.1325 );
 end

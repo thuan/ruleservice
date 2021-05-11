@@ -6,32 +6,36 @@ dialect  "mvel"
 rule "GuidedAcrescentarCargaLiquidaResolucao13 1"
 	when
 		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false && regiaoEmitente == "SUL_SUDESTE" )
-		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
+		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,1) == "1" || cst.substring(0,1) == "2" || cst.substring(0,1) == "3" || cst.substring(0,1) == "8" ))
 	then
 		resultado.setCalcularImposto( true );
-		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.0176 );
+		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.0176 );
+		resultado.setMensagem("Imposto Calculado");
 end
 
 rule "GuidedAcrescentarCargaLiquidaResolucao13 2"
 	when
 		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false && regiaoEmitente == "OUTROS" )
-		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,0) == "1" || cst.substring(0,0) == "2" || cst.substring(0,0) == "3" || cst.substring(0,0) == "8" ))
+		obj : AlimentoAcordanteEntrada( percentualICMS == 0.04 && ( cst.substring(0,1) == "1" || cst.substring(0,1) == "2" || cst.substring(0,1) == "3" || cst.substring(0,1) == "8" ))
 	then
 		resultado.setCalcularImposto( true );
-		resultado.setPercentualCargaLiquida( getPercentualCargaLiquida()*1.047 );
+		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.047 );
+		resultado.setMensagem("Imposto Calculado");
 end
 
 rule "GuidedAcrescentarCargaLiquidaResolucao13 3"
 	when
 		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == false )
-		obj : AlimentoAcordanteEntrada( (cst == null || cst == "") || ( cst.substring(0,0) != "1" || cst.substring(0,0) != "2" || cst.substring(0,0) != "3" || cst.substring(0,0) != "8" ))
+		obj : AlimentoAcordanteEntrada( (cst == null || cst == "") || ( cst.substring(0,1) != "1" || cst.substring(0,1) != "2" || cst.substring(0,1) != "3" || cst.substring(0,1) != "8" ))
 	then
 		resultado.setCalcularImposto( true );
+		resultado.setMensagem("Imposto Calculado");
 end
 
 rule "GuidedAcrescentarCargaLiquidaResolucao13 4"
 	when
 		obj : AlimentoAcordanteEntrada( cst == null || cst == "" )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setMensagem( "CST nao informado" );
 end
