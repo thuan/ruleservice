@@ -1,18 +1,18 @@
 package com.itegra.auditcom.config;
 
-import com.itegra.auditcom.security.*;
-import com.itegra.auditcom.security.jwt.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
+
+import com.itegra.auditcom.security.AuthoritiesConstants;
+import com.itegra.auditcom.security.jwt.JWTConfigurer;
+import com.itegra.auditcom.security.jwt.TokenProvider;
+
 import tech.jhipster.config.JHipsterProperties;
 
 @EnableWebSecurity
@@ -20,24 +20,21 @@ import tech.jhipster.config.JHipsterProperties;
 @Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final JHipsterProperties jHipsterProperties;
+	private final JHipsterProperties jHipsterProperties;
 
-    private final TokenProvider tokenProvider;
-    private final SecurityProblemSupport problemSupport;
+	private final TokenProvider tokenProvider;
+	private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(
-        TokenProvider tokenProvider,
-        JHipsterProperties jHipsterProperties,
-        SecurityProblemSupport problemSupport
-    ) {
-        this.tokenProvider = tokenProvider;
-        this.problemSupport = problemSupport;
-        this.jHipsterProperties = jHipsterProperties;
-    }
+	public SecurityConfiguration(TokenProvider tokenProvider, JHipsterProperties jHipsterProperties,
+			SecurityProblemSupport problemSupport) {
+		this.tokenProvider = tokenProvider;
+		this.problemSupport = problemSupport;
+		this.jHipsterProperties = jHipsterProperties;
+	}
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		// @formatter:off
         http
             .csrf()
             .disable()
@@ -70,9 +67,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .apply(securityConfigurerAdapter());
         // @formatter:on
-    }
+	}
 
-    private JWTConfigurer securityConfigurerAdapter() {
-        return new JWTConfigurer(tokenProvider);
-    }
+	private JWTConfigurer securityConfigurerAdapter() {
+		return new JWTConfigurer(tokenProvider);
+	}
 }
