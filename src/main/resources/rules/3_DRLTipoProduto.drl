@@ -3,14 +3,12 @@ import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
 import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
 dialect  "mvel"
 
-
 rule "GuidedTipoProduto 1"
 	when
 		obj : AlimentoAcordanteEntrada( categoria == "2004" )
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "7%_CESTA_BASICA" );
-		resultado.setCategoria( obj.categoria );
 end
 
 rule "GuidedTipoProduto 2"
@@ -19,25 +17,22 @@ rule "GuidedTipoProduto 2"
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "12%_CESTA_BASICA" );
-		resultado.setCategoria( obj.categoria );
 end
 
 rule "GuidedTipoProduto 3"
 	when
-		obj : AlimentoAcordanteEntrada( categoria == "2001" )
+		obj : AlimentoAcordanteEntrada( categoria == "2004" )
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "17%" );
-		resultado.setCategoria( obj.categoria );
 end
 
 rule "GuidedTipoProduto 4"
-	when	
-		obj : AlimentoAcordanteEntrada( categoria == "2002" || categoria.substring(0,2) == "24")
+	when
+		obj : AlimentoAcordanteEntrada( categoria == "2004" )
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setTipoProduto( "25%_VINHOS_SIDRAS_BEBIDASQUENTES" );
-		resultado.setCategoria( obj.categoria );
 end
 
 rule "GuidedTipoProduto 5"
@@ -45,6 +40,14 @@ rule "GuidedTipoProduto 5"
 		obj : AlimentoAcordanteEntrada( categoria == "null" || categoria == "")
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
-		resultado.setTipoProduto( "categoria não informada" );
-		resultado.setCategoria( obj.categoria );
+		resultado.setTipoProduto( "Categoria não informada" );
 end
+
+rule "GuidedTipoProduto 6"
+	when
+		obj : AlimentoAcordanteEntrada( (categoria != "2004" || categoria != "2005" || categoria != "2001" || categoria != "2002") || (categoria.substring(0,1) != "24"))
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+	then
+		resultado.setTipoProduto( "Categoria desconhecida" );
+end
+
