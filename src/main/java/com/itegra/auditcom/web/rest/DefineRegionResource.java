@@ -27,9 +27,7 @@ public class DefineRegionResource {
 			@RequestParam(required = false) BigDecimal valorItem, @RequestParam BigDecimal valorIPI,
 			@RequestParam(required = false) BigDecimal valorFrete,
 			@RequestParam(required = false) BigDecimal valorSeguro, @RequestParam BigDecimal valorOutros,
-			@RequestParam(required = false) BigDecimal cfop, @RequestParam(required = false) BigDecimal cnpjEmitente,
-			@RequestParam BigDecimal cnpjDestinatario, @RequestParam BigDecimal categoria,
-			@RequestParam BigDecimal normaExecucao, @RequestParam BigDecimal cst) throws IOException {
+			@RequestParam BigDecimal cst, @RequestParam BigDecimal categoria) throws IOException {
 		AlimentoAcordanteEntrada alimentoAcordanteEntrada = new AlimentoAcordanteEntrada(ufEmitente, ufDestinatario);
 		ResultadoAlimentoAcordanteEntrada resultadoAlimentoAcordanteEntrada = new ResultadoAlimentoAcordanteEntrada();
 		return kieService.resultado(alimentoAcordanteEntrada, resultadoAlimentoAcordanteEntrada);
