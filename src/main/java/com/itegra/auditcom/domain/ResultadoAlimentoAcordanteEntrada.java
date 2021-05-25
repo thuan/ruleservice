@@ -13,7 +13,7 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
 	private String idNf;
 	private double valorImposto;
 	private double valorBaseDeCalculo;
-	private Double percentualCargaLiquida;
+	private double percentualCargaLiquida;
 	private boolean calcularImposto;
 	private boolean simplesNacional;
 	private String mensagem;
