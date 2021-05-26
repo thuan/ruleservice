@@ -3,24 +3,27 @@ import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
 import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
 dialect  "mvel"
 
+
 rule "Acrescentar Carga Liquida Simples Nacional 1"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == true && regiaoEmitente == "INTERNO" )
+		obj : AlimentoAcordanteEntrada( ( ( percentualICMS == null || percentualICMS == 0.0 ) && ( crt == 1 || crt == 2 )) && (ufEmitente == "CE"))
+		resultado: ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.03 );
 end
 
 rule "Acrescentar Carga Liquida Simples Nacional 2"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == true && regiaoEmitente == "SUL_SUDESTE" )
+		obj : AlimentoAcordanteEntrada( ( ( percentualICMS == null || percentualICMS == 0.0 ) && ( crt == 1 || crt == 2 )) && (ufEmitente in ( "SP", "MG", "RJ", "PR", "SC", "RS" )) )
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.04 );
 end
 
 rule "Acrescentar Carga Liquida Simples Nacional 3"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( simplesNacional == true && regiaoEmitente == "OUTROS" )
+		obj : AlimentoAcordanteEntrada( ( ( percentualICMS == null || percentualICMS == 0.0 ) && ( crt == 1 || crt == 2 )) && (ufEmitente in ( "AC", "AL", "AP", "AM", "BA", "DF", "ES", "GO", "MA", "MS", "MT", "PA", "PB", "PE", "PI", "RN", "RO", "RR", "SE", "TO" ) ))
+		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
 		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.06 );
 end
-
