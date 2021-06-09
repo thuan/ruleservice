@@ -10,22 +10,34 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
 
     private double valorImposto;
     private double valorBaseDeCalculo;
-    private Double percentualCargaLiquida;
+    private double percentualCargaLiquida;
 
     private boolean calcularImposto;
     private boolean simplesNacional;
 
     private String mensagem;
+
     private String regiaoEmitente;
     private String regiaoDestinatario;
     private String fluxo;
     private String tipoProduto;
     private String categoria;
 
-    public ResultadoAlimentoAcordanteEntrada() {
-    }
+    public ResultadoAlimentoAcordanteEntrada() {}
 
-    public ResultadoAlimentoAcordanteEntrada(double valorImposto, double valorBaseDeCalculo, Double percentualCargaLiquida, boolean calcularImposto, boolean simplesNacional, String mensagem, String regiaoEmitente, String regiaoDestinatario, String fluxo, String tipoProduto, String categoria) {
+    public ResultadoAlimentoAcordanteEntrada(
+        double valorImposto,
+        double valorBaseDeCalculo,
+        double percentualCargaLiquida,
+        boolean calcularImposto,
+        boolean simplesNacional,
+        String mensagem,
+        String regiaoEmitente,
+        String regiaoDestinatario,
+        String fluxo,
+        String tipoProduto,
+        String categoria
+    ) {
         this.valorImposto = valorImposto;
         this.valorBaseDeCalculo = valorBaseDeCalculo;
         this.percentualCargaLiquida = percentualCargaLiquida;
@@ -63,11 +75,11 @@ public class ResultadoAlimentoAcordanteEntrada implements java.io.Serializable {
         this.valorBaseDeCalculo = valorBaseDeCalculo;
     }
 
-    public Double getPercentualCargaLiquida() {
+    public double getPercentualCargaLiquida() {
         return percentualCargaLiquida;
     }
 
-    public void setPercentualCargaLiquida(Double percentualCargaLiquida) {
+    public void setPercentualCargaLiquida(double percentualCargaLiquida) {
         this.percentualCargaLiquida = percentualCargaLiquida;
     }
 

@@ -5,7 +5,9 @@ dialect  "mvel"
 
 rule "regra calcular imposto"
 	when
-		resultado : ResultadoAlimentoAcordanteEntrada( calcularImposto == true )
-	then
-		resultado.setValorImposto( resultado.getValorBaseDeCalculo() * resultado.getPercentualCargaLiquida() );
+		resultado : ResultadoAlimentoAcordanteEntrada( )
+		obj : AlimentoAcordanteEntrada(resultado.isCalcularImposto(  ) == true)
+	then		
+		resultado.valorImposto = resultado.valorBaseDeCalculo * resultado.percentualCargaLiquida
+
 end

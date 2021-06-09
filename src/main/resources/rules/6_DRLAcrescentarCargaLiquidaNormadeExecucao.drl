@@ -1,12 +1,12 @@
 package rules;
 import com.itegra.auditcom.domain.AlimentoAcordanteEntrada;
 import com.itegra.auditcom.domain.ResultadoAlimentoAcordanteEntrada;
-dialect  "mvel"
+dialect "mvel"
 
-rule "GuidedAcrescentarCargaLiquidaNormadeExecucao"
+rule "GuidedAcrescentarCargaLiquidaNormadeExecucao 1"
 	when
 		obj : AlimentoAcordanteEntrada( normaExecucao == "1" )
 		resultado : ResultadoAlimentoAcordanteEntrada( )
 	then
-		resultado.setPercentualCargaLiquida( resultado.getPercentualCargaLiquida()*1.05 );
+		resultado.setPercentualCargaLiquida(resultado.getPercentualCargaLiquida()*1.05);
 end
