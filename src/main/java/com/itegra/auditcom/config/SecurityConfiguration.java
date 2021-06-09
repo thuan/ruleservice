@@ -1,13 +1,11 @@
 package com.itegra.auditcom.config;
 
-import com.itegra.auditcom.security.*;
-import com.itegra.auditcom.security.jwt.*;
-import org.springframework.context.annotation.Bean;
+import com.itegra.auditcom.security.AuthoritiesConstants;
+import com.itegra.auditcom.security.jwt.JWTConfigurer;
+import com.itegra.auditcom.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
