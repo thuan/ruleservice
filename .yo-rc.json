@@ -37,7 +37,7 @@
     "devDatabaseType": "no",
     "prodDatabaseType": "no",
     "languages": ["en", "fr"],
-    "entities": ["Condominio", "Unidade", "Morador"],
-    "lastLiquibaseTimestamp": 1619655541000
+    "lastLiquibaseTimestamp": 1619655541000,
+    "appFolder": "ruleservice"
   }
 }

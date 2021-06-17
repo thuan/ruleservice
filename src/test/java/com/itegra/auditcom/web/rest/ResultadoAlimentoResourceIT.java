@@ -11,13 +11,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 /**
  * Test class for the ResultadoAlimentoResource REST controller.
  *
  * @see ResultadoAlimentoResource
  */
-@IntegrationTest
+/*@IntegrationTest
 class ResultadoAlimentoResourceIT {
 
     private MockMvc restMockMvc;
@@ -33,11 +32,11 @@ class ResultadoAlimentoResourceIT {
         restMockMvc = MockMvcBuilders.standaloneSetup(resultadoAlimentoResource).build();
     }
 
-    /**
-     * Test getResultByAlimento
-     */
+    *//**
+ * Test getResultByAlimento
+ *//*
     @Test
     void testGetResultByAlimento() throws Exception {
         restMockMvc.perform(get("/api/resultado-alimento/get-result-by-alimento")).andExpect(status().isOk());
     }
-}
+}*/
